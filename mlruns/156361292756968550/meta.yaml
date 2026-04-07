@@ -1,0 +1,6 @@
+artifact_location: file:///Users/kristina.kavelits/Desktop/loputoo/bank-churn-mlops/mlruns/156361292756968550
+creation_time: 1775552776756
+experiment_id: '156361292756968550'
+last_update_time: 1775552776756
+lifecycle_stage: active
+name: bank_churn_prediction

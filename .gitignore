@@ -1,0 +1,25 @@
+# Environments
+venv/
+env/
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Mac OS
+.DS_Store
+
+# IDEs
+.vscode/
+.idea/
+
+# MLOps Artifacts
+reports/
+
+# Note: We are deliberately NOT ignoring mlruns/ because it contains
+# our initial baseline model which GitHub Actions needs to start with!
+# We are also NOT ignoring .cursorrules and CLAUDE.md
+# We are also NOT ignoring the data/ folder because the GitHub Actions
+# pipeline needs the batch files to run.

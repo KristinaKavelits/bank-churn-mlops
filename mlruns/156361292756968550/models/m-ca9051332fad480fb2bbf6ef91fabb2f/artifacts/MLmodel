@@ -1,0 +1,35 @@
+artifact_path: file:///Users/kristina.kavelits/Desktop/loputoo/bank-churn-mlops/mlruns/156361292756968550/models/m-ca9051332fad480fb2bbf6ef91fabb2f/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.9.6
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.6.1
+is_signature_from_type_hint: false
+mlflow_version: 3.1.4
+model_id: m-ca9051332fad480fb2bbf6ef91fabb2f
+model_size_bytes: 4748507
+model_uuid: m-ca9051332fad480fb2bbf6ef91fabb2f
+prompts: null
+run_id: f5719e2befb54b10a468fe1e6efc0836
+signature:
+  inputs: '[{"type": "long", "name": "credit_score", "required": true}, {"type": "string",
+    "name": "country", "required": true}, {"type": "string", "name": "gender", "required":
+    true}, {"type": "long", "name": "age", "required": true}, {"type": "long", "name":
+    "tenure", "required": true}, {"type": "double", "name": "balance", "required":
+    true}, {"type": "long", "name": "products_number", "required": true}, {"type":
+    "long", "name": "credit_card", "required": true}, {"type": "long", "name": "active_member",
+    "required": true}, {"type": "double", "name": "estimated_salary", "required":
+    true}]'
+  outputs: '[{"type": "tensor", "tensor-spec": {"dtype": "int64", "shape": [-1]}}]'
+  params: null
+type_hint_from_example: false
+utc_time_created: '2026-04-07 09:06:17.872997'

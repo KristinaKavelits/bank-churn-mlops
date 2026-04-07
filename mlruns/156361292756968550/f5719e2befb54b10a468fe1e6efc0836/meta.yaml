@@ -1,0 +1,14 @@
+artifact_uri: file:///Users/kristina.kavelits/Desktop/loputoo/bank-churn-mlops/mlruns/156361292756968550/f5719e2befb54b10a468fe1e6efc0836/artifacts
+end_time: 1775552780784
+entry_point_name: ''
+experiment_id: '156361292756968550'
+lifecycle_stage: active
+run_id: f5719e2befb54b10a468fe1e6efc0836
+run_name: baseline_model
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1775552776848
+status: 3
+tags: []
+user_id: kristina.kavelits

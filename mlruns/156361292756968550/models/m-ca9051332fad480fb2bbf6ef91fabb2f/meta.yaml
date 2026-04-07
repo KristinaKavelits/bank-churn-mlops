@@ -1,0 +1,10 @@
+artifact_location: file:///Users/kristina.kavelits/Desktop/loputoo/bank-churn-mlops/mlruns/156361292756968550/models/m-ca9051332fad480fb2bbf6ef91fabb2f/artifacts
+creation_timestamp: 1775552777851
+experiment_id: '156361292756968550'
+last_updated_timestamp: 1775552780715
+model_id: m-ca9051332fad480fb2bbf6ef91fabb2f
+model_type: null
+name: model
+source_run_id: f5719e2befb54b10a468fe1e6efc0836
+status: 2
+status_message: null
