@@ -19,6 +19,12 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
+      - name: Fix MLflow Local Paths for GitHub Actions
+        run: |
+          echo "Updating MLflow absolute paths to match GHA runner..."
+          find mlruns -type f -name "*.yaml" -exec sed -i "s|/Users/kristina.kavelits/Desktop/loputoo/bank-churn-mlops|${{ github.workspace }}|g" {} +
+          find mlruns -type f -name "*.txt" -exec sed -i "s|/Users/kristina.kavelits/Desktop/loputoo/bank-churn-mlops|${{ github.workspace }}|g" {} +
+
       - name: Setup Python 3.10
         uses: actions/setup-python@v4
         with:
@@ -67,6 +73,12 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
+
+      - name: Fix MLflow Local Paths for GitHub Actions
+        run: |
+          echo "Updating MLflow absolute paths to match GHA runner..."
+          find mlruns -type f -name "*.yaml" -exec sed -i "s|/Users/kristina.kavelits/Desktop/loputoo/bank-churn-mlops|${{ github.workspace }}|g" {} +
+          find mlruns -type f -name "*.txt" -exec sed -i "s|/Users/kristina.kavelits/Desktop/loputoo/bank-churn-mlops|${{ github.workspace }}|g" {} +
 
       - name: Setup Python 3.10
         uses: actions/setup-python@v4
