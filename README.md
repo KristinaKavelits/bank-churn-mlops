@@ -18,7 +18,7 @@ The automated flow works as follows:
 
 ## 🧪 How to Test the Pipeline (Thesis Scenarios)
 
-To demonstrate the full capabilities of this MLOps pipeline, we have prepared specific data batches that simulate different real-world scenarios.
+To demonstrate the full capabilities of this MLOps pipeline, we have prepared specific data batches in the `data/` folder that simulate different real-world scenarios.
 
 ### 1. The "Happy Path" (Healthy Pipeline)
 * **Goal:** Prove the pipeline works when data is normal.
@@ -27,23 +27,28 @@ To demonstrate the full capabilities of this MLOps pipeline, we have prepared sp
 
 ### 2. The "Gatekeeper" (Data Validation Failure)
 * **Goal:** Prove the pipeline blocks corrupted data before it breaks the monitoring tools.
-* **Files to use:** `data/batch_1_broken_data.csv` or `data/batch_1_semantic_errors.csv`
-* **Expected Result:** Validation catches the errors, logs a 🚨 critical failure, and immediately halts the pipeline (Exit Code 1).
+* **How to test:** Open `data/batch_1.csv`, change a number in the `age` column to the word `"forty"`, save it as `data/batch_1_broken.csv`, and run the pipeline on it.
+* **Expected Result:** Validation catches the type error, logs a 🚨 critical failure, and immediately halts the pipeline (Exit Code 1).
 
-### 3. Data Drift (The "Inflation" Scenario)
+### 3. Data Drift (The "Inflation" Scenario - Delayed Labels)
 * **Goal:** Prove the system can detect when the input features (X) change drastically, and estimate the performance drop *before* the true labels arrive.
-* **File to use:** `data/batch_2_drifted_unlabeled.csv` (Balances and salaries multiplied by 1.5x).
-* **Expected Result:** Evidently detects Data Drift. NannyML estimates a massive drop in the F1-Score. The pipeline signals for retraining, but gracefully skips it because ground truth labels are missing.
+* **File to use:** `data/batch_2_drifted_unlabeled.csv` (Balances and salaries multiplied by 1.5x, no `churn` column).
+* **Expected Result:** Evidently detects Data Drift. NannyML estimates a massive drop in the F1-Score. The pipeline signals for retraining, but gracefully skips the retraining job because ground truth labels are missing.
 
 ### 4. Target Drift (The "Economic Crash" Scenario)
 * **Goal:** Prove the system can detect when the fundamental behavior of the customers (Y) changes, and successfully execute a Shadow Deployment.
-* **File to use:** `data/batch_3_target_drift.csv` (Massive sudden churn).
+* **File to use:** `data/batch_3_target_drift.csv` (Massive sudden churn, `churn` column present).
 * **Expected Result:** Evidently detects Target Drift. The system calculates the *Actual* F1 drop, triggers retraining, trains a Challenger model, pits it against the Champion, and promotes the Challenger to Production.
 
 ### 5. Concept Drift (The "Blind Spot" Scenario)
-* **Goal:** Prove the mathematical limitations of Performance Estimation algorithms.
-* **File to use:** `data/batch_4_concept_drift_unlabeled.csv` (Young people suddenly churn, but input features look normal).
+* **Goal:** Prove the mathematical limitations of Performance Estimation algorithms when the world changes but input features remain identical.
+* **File to use:** `data/batch_4_concept_drift_unlabeled.csv` (Young people suddenly churn, but input features look normal, no `churn` column).
 * **Expected Result:** NannyML is "blind" to this pure concept drift and incorrectly estimates that the F1-Score is healthy. *This is a fundamental limitation of all estimation algorithms and a crucial point for thesis discussion!*
+
+### 6. Concept Drift Revealed (Labels Arrive)
+* **Goal:** Prove that the system can recover from the "Blind Spot" once the true labels finally arrive.
+* **File to use:** `data/batch_4_concept_drift.csv` (Same as above, but the `churn` column is now present).
+* **Expected Result:** The system calculates the *Actual* F1-Score, realizes the model is failing, triggers retraining, and successfully executes a Shadow Deployment to fix the blind spot.
 
 ---
 
