@@ -86,11 +86,10 @@ The pipeline automatically logs specific metrics to MLflow to answer the core Re
 
 ### Option A: Run in the Cloud (GitHub Actions)
 This is the recommended, fully automated orchestration method.
-1. Push this repository to GitHub.
-2. Go to the **Actions** tab.
-3. Select **Bank Churn MLOps Pipeline** and click **Run workflow**.
-4. Enter the batch file you want to test (e.g., `data/batch_3_target_drift.csv`).
-5. Download the `mlops-artifacts-final.zip` at the end of the run to view your HTML reports and MLflow metrics.
+1. Go to the **Actions** tab.
+2. Select **Bank Churn MLOps Pipeline** and click **Run workflow**.
+3. Enter the batch file you want to test (e.g., `data/batch_3_target_drift.csv`).
+4. Download the `mlops-artifacts-final.zip` at the end of the run to view your HTML reports and MLflow metrics.
 
 ### Option B: Run Locally (Manual Orchestration)
 **Mac Users Note:** You must install the OpenMP runtime first because NannyML uses XGBoost: `brew install libomp`
