@@ -43,6 +43,14 @@ jobs:
           echo "Running validation on ${{ github.event.inputs.batch_file }}..."
           python src/validation.py --ref data/reference.csv --current ${{ github.event.inputs.batch_file }}
 
+      - name: Upload Validation Report (on failure)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mlops-artifacts-validation
+          path: reports/
+          retention-days: 5
+
       - name: Run Monitoring (Drift & Performance)
         run: |
           echo "Running monitoring on ${{ github.event.inputs.batch_file }}..."
