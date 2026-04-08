@@ -30,7 +30,7 @@ credit_score,country,gender,age,tenure,balance,products_number,credit_card,activ
 646,Spain,Female,50,5,142644.64,2,1,1,142208.5,1
 659,France,Female,44,9,23503.31,1,0,1,169862.01,1
 487,Spain,Male,33,8,145729.71,1,1,0,41365.85,0
-740,Germany,Female,40,2,122295.17,2,1,1,30812.84,0
+740,Germany,Female,forty,2,122295.17,2,1,1,30812.84,0
 686,France,Male,39,4,0.0,2,1,0,155023.93,0
 612,Spain,Female,36,5,119799.27,2,1,0,159416.58,0
 655,Spain,Male,37,8,163708.58,2,0,0,76259.23,0

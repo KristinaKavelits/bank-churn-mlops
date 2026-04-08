@@ -27,8 +27,11 @@ To demonstrate the full capabilities of this MLOps pipeline, we have prepared sp
 
 ### 2. The "Gatekeeper" (Data Validation Failure)
 * **Goal:** Prove the pipeline blocks corrupted data before it breaks the monitoring tools.
-* **How to test:** Open `data/batch_1.csv`, change a number in the `age` column to the word `"forty"`, save it as `data/batch_1_broken.csv`, and run the pipeline on it.
-* **Expected Result:** Validation catches the type error, logs a 🚨 critical failure, and immediately halts the pipeline (Exit Code 1).
+* **How to test (Layer 1):** Open `data/batch_1_semantic_error.csv`, where a number in the `age` column is changed to the word `"forty"`. Run the pipeline on it. 
+* **Expected Result:** Layer 1 of the validation should catch the type error, logs a 🚨 critical failure, and immediately halts the pipeline (Exit Code 1).
+
+* **How to test (Layer 2):** Open `data/batch_1_technical_error.csv`, where some value is missing. Run the pipeline on it. 
+* **Expected Result:** Layer 2 of the validation should catch the type error, logs a 🚨 critical failure, and immediately halts the pipeline (Exit Code 1).
 
 ### 3. Data Drift (The "Inflation" Scenario - Delayed Labels)
 * **Goal:** Prove the system can detect when the input features (X) change drastically, and estimate the performance drop *before* the true labels arrive.
