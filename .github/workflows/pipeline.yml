@@ -114,8 +114,13 @@ jobs:
 
       - name: Evaluate & Promote (The Judge)
         run: |
-          echo "Pitting Challenger vs Champion..."
-          python src/registry.py
+          if [ -f "data/staging_test_set.csv" ]; then
+            echo "Pitting Challenger vs Champion..."
+            python src/registry.py
+          else
+            echo "⚠️ No staging_test_set.csv found. Retraining was likely skipped due to delayed ground truth."
+            echo "Skipping Registry evaluation gracefully."
+          fi
 
       - name: Upload Final Artifacts
         uses: actions/upload-artifact@v4
