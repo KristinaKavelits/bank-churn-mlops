@@ -33,8 +33,8 @@ def run_validation(reference_path: str, current_path: str, report_dir: str) -> N
     # LAYER 1: Pandas Pre-Validation (Fail-Fast before Evidently)
     logger.info("Running Layer 1: Pandas Pre-Validation...")
     
-    # Check 1: Missing Columns
-    missing_cols = set(reference_data.columns) - set(current_data.columns)
+    # Check 1: Missing Columns (Allow 'churn' to be missing for delayed ground truth scenarios)
+    missing_cols = set(reference_data.columns) - set(current_data.columns) - {'churn'}
     extra_cols = set(current_data.columns) - set(reference_data.columns)
     
     if missing_cols or extra_cols:
@@ -49,7 +49,10 @@ def run_validation(reference_path: str, current_path: str, report_dir: str) -> N
     # Check 2: Data Type Mismatch
     # If a user types "forty" instead of 40, Pandas will load the column as 'object' instead of 'int64'
     type_mismatches = []
-    for col in reference_data.columns:
+    for col in current_data.columns:
+        if col not in reference_data.columns:
+            continue
+            
         ref_type = reference_data[col].dtype
         curr_type = current_data[col].dtype
         
@@ -69,6 +72,10 @@ def run_validation(reference_path: str, current_path: str, report_dir: str) -> N
     # LAYER 2: Evidently TestSuite (Deep Data Quality & HTML Report)
     logger.info("Initializing Layer 2: Evidently TestSuite for Deep Data Quality...")
     
+    # If current data doesn't have churn, drop it from reference so Evidently doesn't crash or complain
+    if 'churn' not in current_data.columns and 'churn' in reference_data.columns:
+        reference_data = reference_data.drop(columns=['churn'])
+
     # Define the tests we want to run
     data_quality_suite = TestSuite(tests=[
         # 3. Check for missing values (we expect 0 missing values based on our model's needs)
